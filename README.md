@@ -1,11 +1,11 @@
 # strix-docker
-A Dockerfile to install Strix (https://strix.model.in.tum.de/, https://gitlab.lrz.de/i7/strix/) in an Ubuntu docker image. 
+A Dockerfile to install [St](https://strix.model.in.tum.de/)r[ix](https://gitlab.lrz.de/i7/strix/) in an Ubuntu docker image. 
 
 This can be used to use Strix on a Windows machine.
 
 ## Instructions
 
-  1. Install docker (this was tried with Docker version 19.03.13, build 4484c46d9d)
+  1. Install [docker](https://www.docker.com/) (this was tried with Docker version 19.03.13, build 4484c46d9d)
   2. In a folder containing the Dockerfile run:
     
 ```
