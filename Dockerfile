@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER me@gmail.com
+MAINTAINER shaun.azzopardi@gmail.com
 RUN apt-get update 
 RUN apt-get install -y g++ cmake make libboost-dev libboost-program-options-dev libboost-filesystem-dev libboost-iostreams-dev zlib1g-dev openjdk-13-jdk
 RUN apt-get install -y wget 
@@ -20,7 +20,10 @@ RUN wget https://strix.model.in.tum.de/files/strix-20.10.zip
 RUN apt-get install unzip
 RUN unzip strix-20.10.zip
 ##########
-RUN apt-get install -y build-essential
-RUN cd /strix && make
-# RUN mv /strix/bin /bin
+RUN apt-get install -y haskell-stack
+RUN git clone https://github.com/meyerphi/syfco.git
+RUN cd syfco && stack setup
+RUN cd syfco && stack build 
+RUN cd syfco && stack install
+RUN rm -rf syfco
 ENTRYPOINT ["/strix/bin/strix"]
