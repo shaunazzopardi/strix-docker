@@ -18,7 +18,9 @@ RUN apt-get install -y git
 #### OR ####
 RUN wget https://strix.model.in.tum.de/files/strix-20.10.zip
 RUN apt-get install unzip
-RUN unzip strix-20.10.zip
+RUN unzip strix-20.10.zip -d ./bin/
+RUN apt-get install -y build-essential
+RUN cd /bin/strix && make
 ##########
 ##########
 # Installs syfco
@@ -26,12 +28,9 @@ RUN apt-get install -y haskell-stack
 RUN git clone https://github.com/meyerphi/syfco.git
 RUN cd syfco && stack setup
 RUN cd syfco && stack build 
-RUN cd syfco && stack install
-RUN rm -rf syfco
+RUN cd syfco && stack install --local-bin-path "../bin"
 ###########
 ## Installs all dependencies, however be warned that some links may not work
-# RUN apt-get install -y build-essential
-# RUN cd /strix && make
 # RUN apt-get -y install sudo
 # RUN apt-get -y install sed
 # RUN sed -i 's/apt install/apt -y install/g' /strix/scripts/install_dependencies.sh 
@@ -39,10 +38,6 @@ RUN rm -rf syfco
 # RUN apt-get -y install clang flex bison patch gzip libxml2
 # RUN echo 'export PATH=/root/.local/bin:$PATH' >> ~/.bashrc
 # RUN /strix/scripts/install_dependencies.sh 
-# RUN mv /strix/bin /bin
 ###########
-ENTRYPOINT ["/strix/bin/strix"]
-###########
-# For input as .tlsf file
-ENTRYPOINT ["/strix/scripts/strix_tlsf.sh"]
+ENTRYPOINT ["./bin/strix/bin/strix"]
 ###########
