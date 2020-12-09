@@ -40,5 +40,9 @@ RUN rm -rf syfco
 # RUN echo 'export PATH=/root/.local/bin:$PATH' >> ~/.bashrc
 # RUN /strix/scripts/install_dependencies.sh 
 # RUN mv /strix/bin /bin
-
+###########
 ENTRYPOINT ["/strix/bin/strix"]
+###########
+# For input as .tlsf file
+ENTRYPOINT ["/strix/scripts/strix_tlsf.sh"]
+###########
