@@ -9,7 +9,7 @@ This can be used to use Strix on a Windows machine.
   2. In a folder containing the Dockerfile run:
     
 ```
-    docker build --tag=strix
+    docker build --tag=strix .
 ```
    
   3. And that's it! Strix should be ready to run.
