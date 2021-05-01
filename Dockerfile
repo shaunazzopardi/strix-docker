@@ -33,5 +33,4 @@ RUN cd ./syfco && stack install --local-bin-path "../bin"
 # RUN echo 'export PATH=/root/.local/bin:$PATH' >> ~/.bashrc
 # RUN /strix/scripts/install_dependencies.sh 
 ###########
-ENTRYPOINT ["./bin/strix/bin/strix"]
-###########
+ENTRYPOINT ["./strix/bin/strix"]
