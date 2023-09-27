@@ -21,20 +21,20 @@ RUN tar -C /usr/lib/jvm/ -zxvf graalvm-ce-java11-linux-amd64-21.1.0.tar.gz
 RUN mv /usr/lib/jvm/graalvm-ce-java11-21.1.0/ /usr/lib/jvm/java-11-graalvm/
 RUN cd /usr/lib/jvm && ln -s java-11-graalvm graalvm 
 RUN /usr/lib/jvm/java-11-graalvm/bin/gu install native-image
+ENV PATH="/usr/lib/jvm/java-11-graalvm/bin/:${PATH}"
+ENV JAVA_HOME /usr/lib/jvm/java-11-graalvm/
 ##########
 # Installs strix
 RUN git clone https://github.com/meyerphi/strix.git ./strix
-RUN cd ./strix && git reset --hard fd372cf
-RUN echo $(ls -1 ./)
+RUN cd ./strix 
+### && git reset --hard fd372cf
+### RUN echo $(ls -1 ./)
 RUN cd ./strix && git submodule init && git submodule update
 RUN apt-get install curl
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 RUN apt-get install -y clang
 RUN apt -y install vim apt-transport-https dirmngr wget software-properties-common
-ENV PATH="/usr/lib/jvm/bin/:${PATH}"
-ENV PATH="/usr/lib/jvm/java-11-graalvm/bin/:${PATH}"
-# RUN echo 'export PATH=/usr/lib/jvm/:$PATH' >> ~/.bashrc
 RUN cd ./strix && cargo build --release
 ENV PATH="/strix/target/release/:${PATH}"
 ENTRYPOINT ["./strix/scripts/strix_tlsf.sh"]
